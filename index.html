@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html> 
+<head>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+	<style>
+		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
+		</style>
+</head>
+<body>
+	<div id = "map"></div>
+	<script>
+		var map = L.map('map').setView([20,0], 2);
+		
+	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+		maxZoom: 13,
+		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+	
+	}).addTo(map);
+	
+<!--"the follow establishes layers for the various represented periods"-->	
+
+let twenty = L.layerGroup().addTo( map )
+
+let nintn = L.layerGroup().addTo( map )
+
+let eihtn = L.layerGroup().addTo( map )
+
+let fivtn = L.layerGroup().addTo( map )
+
+let fortn = L.layerGroup().addTo( map )
+
+let BCE = L.layerGroup().addTo( map )
+
+let WORKS = L.layerGroup().addTo( map )
+
+<!--"the following is the geojson for the list of artists/works"-->	
+
+var geojsonFeature = [
+	{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Salman Toor",
+        "Birth": 1983,
+        "Death": 0,
+        "Country": "America",
+        "KeyWork": "Puppy Play Date",
+        "WorkYear": 2019,
+        "YearUpper": "",
+        "Movement": "Contemporary",
+        "LowLat": 31.17896864,
+        "HighLat": 31.59966091,
+        "LowLong": 74.31041529,
+        "HighLong": 74.78049519,
+        "Period": 2000,
+        "Photo": "https://mdl.artvee.com/sftb/407385mfg.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.31041529,
+          31.59966091
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Winslow Homer",
+        "Birth": 1836,
+        "Death": 1910,
+        "Country": "America",
+        "KeyWork": "Eight Bells",
+        "WorkYear": 1886,
+        "YearUpper": "",
+        "Movement": "American Realism",
+        "LowLat": 42.01631369,
+        "HighLat": 42.3504255,
+        "LowLong": -71.09528862,
+        "HighLong": -70.5291035,
+        "Period": 1800,
+        "Photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/WinslowHomer-Eight_Bells_1886.jpg/1200px-WinslowHomer-Eight_Bells_1886.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.09528862,
+          42.3504255
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Cy Twombly",
+        "Birth": 1928,
+        "Death": 2011,
+        "Country": "America",
+        "KeyWork": "Leda and the Swan",
+        "WorkYear": 1962,
+        "YearUpper": "",
+        "Movement": "Abstract Expressionism",
+        "LowLat": 37.44925944,
+        "HighLat": 37.78337125,
+        "LowLong": -79.43863032,
+        "HighLong": -78.94034563,
+        "Period": 1900,
+        "Photo": "https://www.moma.org/media/W1siZiIsIjE1MTQxMSJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA5MCAtcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=fa9ccd64321f3de5"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.43863032,
+          37.78337125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Louis Bourgeois",
+        "Birth": 1911,
+        "Death": 2010,
+        "Country": "France",
+        "KeyWork": "spider",
+        "WorkYear": 1997,
+        "YearUpper": "",
+        "Movement": "Surrealism",
+        "LowLat": 48.50100702,
+        "HighLat": 48.83511883,
+        "LowLong": 2.331940642,
+        "HighLong": 2.857907819,
+        "Period": 1900,
+        "Photo": "https://bynder.southbankcentre.co.uk/m/2b1c95f25144c87d/original/Louise-Bourgeois-Bilbao-Galerias.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.331940642,
+          48.83511883
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Gustave Courbet",
+        "Birth": 1819,
+        "Death": 1877,
+        "Country": "France",
+        "KeyWork": "After Dinner at Ornans",
+        "WorkYear": 1849,
+        "YearUpper": "",
+        "Movement": "Realism",
+        "LowLat": 46.77138394,
+        "HighLat": 47.10549575,
+        "LowLong": 6.147511634,
+        "HighLong": 6.765405547,
+        "Period": 1800,
+        "Photo": "https://www.gustave-courbet.com/images/paintings/after-dinner-at-ornans.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.147511634,
+          47.10549575
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Wassily Kandinsky",
+        "Birth": 1866,
+        "Death": 1944,
+        "Country": "Russia",
+        "KeyWork": "Composition Eight",
+        "WorkYear": 1923,
+        "YearUpper": "",
+        "Movement": "Expressoinism",
+        "LowLat": 55.52879077,
+        "HighLat": 55.75301199,
+        "LowLong": 37.62335448,
+        "HighLong": 38.07776505,
+        "Period": 1900,
+        "Photo": "https://cms.guggenheim-bilbao.eus/uploads/2020/09/composition-8.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.62335448,
+          55.75301199
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Pepon Osorio",
+        "Birth": 1955,
+        "Death": 0,
+        "Country": "Puetro Rico",
+        "KeyWork": "En la barberia no se llora",
+        "WorkYear": 1994,
+        "YearUpper": "",
+        "Movement": "Contemporary",
+        "LowLat": 18.16673505,
+        "HighLat": 18.45089659,
+        "LowLong": -66.06551689,
+        "HighLong": -65.53067043,
+        "Period": 2000,
+        "Photo": "https://haircutharry.com/wp-content/uploads/2021/01/No-Crying-In-The-Barbershop-Puerto-Rico-Museo-De-Arte-2-1024x768.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.06551689,
+          18.45089659
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Phyllidia Barlow",
+        "Birth": 1944,
+        "Death": 2023,
+        "Country": "United Kingdom",
+        "KeyWork": "dock",
+        "WorkYear": 2014,
+        "YearUpper": "",
+        "Movement": "Contemporary",
+        "LowLat": 54.80142795,
+        "HighLat": 54.97384889,
+        "LowLong": -1.612914246,
+        "HighLong": -1.247296546,
+        "Period": 2000,
+        "Photo": "https://www.artforum.com/wp-content/uploads/2014/11/article_large-98.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.612914246,
+          54.97384889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Caterina DeRousse",
+        "Birth": 0,
+        "Death": 0,
+        "Country": "America",
+        "KeyWork": "Angela and hugh Spotted Together!",
+        "WorkYear": 2021,
+        "YearUpper": "",
+        "Movement": "Contemporary",
+        "LowLat": 41.54707354,
+        "HighLat": 41.88118535,
+        "LowLong": -87.62642603,
+        "HighLong": -87.12239591,
+        "Period": 2000,
+        "Photo": "https://sites.saic.edu/fashion2021/wp-content/uploads/sites/135/2021/05/DeRousse9.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.62642603,
+          41.88118535
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Raphael Sanzio",
+        "Birth": 1483,
+        "Death": 1520,
+        "Country": "Italy",
+        "KeyWork": "The Small Cowper Madonna",
+        "WorkYear": 1505,
+        "YearUpper": "",
+        "Movement": "Renaissance",
+        "LowLat": 43.39429873,
+        "HighLat": 43.72841053,
+        "LowLong": 12.6333883,
+        "HighLong": 12.97863587,
+        "Period": 1400,
+        "Photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Raphael_-_The_Small_Cowper_Madonna_-_Google_Art_Project.jpg/1200px-Raphael_-_The_Small_Cowper_Madonna_-_Google_Art_Project.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.6333883,
+          43.72841053
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Pontormo",
+        "Birth": 1494,
+        "Death": 1557,
+        "Country": "Italy",
+        "KeyWork": "Visitation",
+        "WorkYear": 1528,
+        "YearUpper": 1530,
+        "Movement": "Mannerism",
+        "LowLat": 43.43374854,
+        "HighLat": 43.76786034,
+        "LowLong": 11.25525504,
+        "HighLong": 11.61042652,
+        "Period": 1500,
+        "Photo": "https://upload.wikimedia.org/wikipedia/commons/3/30/Pontormo-visitation-after-restorationRGB.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.25525504,
+          43.76786034
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Igshaan Adams",
+        "Birth": 1982,
+        "Death": 0,
+        "Country": "",
+        "KeyWork": "Bonteheuwel / Epping",
+        "WorkYear": 2021,
+        "YearUpper": "",
+        "Movement": "Contemporary",
+        "LowLat": -34.50186096,
+        "HighLat": -34.30945992,
+        "LowLong": 18.44990409,
+        "HighLong": 18.85730667,
+        "Period": 2000,
+        "Photo": "https://artlogic-res.cloudinary.com/w_780,c_limit,f_auto,fl_lossy/artlogicstorage/thomasdane/images/view/06b8f6516ad5eac0165c2ac97583fd7ej.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.44990409,
+          -34.30945992
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Edward Steichen",
+        "Birth": 1879,
+        "Death": 1973,
+        "Country": "America",
+        "KeyWork": "In Exaltation of Flowers",
+        "WorkYear": 1910,
+        "YearUpper": 1913,
+        "Movement": "Social Realism",
+        "LowLat": 40.97060493,
+        "HighLat": 41.30471674,
+        "LowLong": -73.37988252,
+        "HighLong": -72.98814927,
+        "Period": 1900,
+        "Photo": "https://artdistricts.com/wp-content/uploads/2020/09/6-2-clivia-fuchsia-hilium-henryi.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.37988252,
+          41.30471674
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Felix Vallotton",
+        "Birth": 1865,
+        "Death": 1925,
+        "Country": "France",
+        "KeyWork": "En Promenade",
+        "WorkYear": 1895,
+        "YearUpper": "",
+        "Movement": "Les Nabis",
+        "LowLat": 49.19244147,
+        "HighLat": 48.85832966,
+        "LowLong": 2.315792469,
+        "HighLong": 2.970248152,
+        "Period": 1800,
+        "Photo": "https://media.mutualart.com/Images/2019_02/25/15/150537237/d68f7d78-b160-4837-ae74-21157cd82e09.Jpeg?w=480"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.315792469,
+          48.85832966
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Jules Cheret",
+        "Birth": 1836,
+        "Death": 1932,
+        "Country": "France",
+        "KeyWork": "Theatre de L'Opera, Carnaval, Grand Veglione de Gala",
+        "WorkYear": 1896,
+        "YearUpper": "",
+        "Movement": "Art Nouveau",
+        "LowLat": 49.15969174,
+        "HighLat": 48.87849022,
+        "LowLong": 2.002403553,
+        "HighLong": 2.294375402,
+        "Period": 1800,
+        "Photo": "https://images.nypl.org/index.php?id=118520&t=w"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.294375402,
+          48.87849022
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Tau Lewis",
+        "Birth": 1993,
+        "Death": 0,
+        "Country": "Canada",
+        "KeyWork": "Delight",
+        "WorkYear": 2020,
+        "YearUpper": "",
+        "Movement": "Contemporary",
+        "LowLat": 43.36635126,
+        "HighLat": 43.70046307,
+        "LowLong": -79.3809383,
+        "HighLong": -79.06650708,
+        "Period": 2000,
+        "Photo": "https://coopercolegallery.com/wp-content/uploads/2020/10/25_CC_Tau-Lewis_2020_Delight_3-683x1024.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3809383,
+          43.70046307
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Pieter Bruegel the Elder",
+        "Birth": 1525,
+        "Death": 1569,
+        "Country": "Netherlands",
+        "KeyWork": "Landscape with Windmills",
+        "WorkYear": 1607,
+        "YearUpper": "",
+        "Movement": "Dutch Renaissance",
+        "LowLat": 50.64560266,
+        "HighLat": 50.84688374,
+        "LowLong": 4.352403438,
+        "HighLong": 4.75040442,
+        "Period": 1500,
+        "Photo": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Brueghel_the_Elder_Landscape_with_windmills.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.352403438,
+          50.84688374
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Francisco Goya",
+        "Birth": 1746,
+        "Death": 1828,
+        "Country": "Spain",
+        "KeyWork": "The Third of May Eighteen-Thousand-Sixteen",
+        "WorkYear": 1814,
+        "YearUpper": "",
+        "Movement": "Romanticism",
+        "LowLat": 41.00862578,
+        "HighLat": 41.34273758,
+        "LowLong": -0.9585715254,
+        "HighLong": -0.3485122774,
+        "Period": 1800,
+        "Photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/El_Tres_de_Mayo%2C_by_Francisco_de_Goya%2C_from_Prado_thin_black_margin.jpg/1200px-El_Tres_de_Mayo%2C_by_Francisco_de_Goya%2C_from_Prado_thin_black_margin.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.9585715254,
+          41.34273758
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Cildo Meireles",
+        "Birth": 1948,
+        "Death": 0,
+        "Country": "Brazil",
+        "KeyWork": "In Fontes (Fountains/Sources)",
+        "WorkYear": 1992,
+        "YearUpper": "",
+        "Movement": "Contemporary",
+        "LowLat": -23.13416454,
+        "HighLat": -22.89625325,
+        "LowLong": -43.18209661,
+        "HighLong": -42.73813226,
+        "Period": 2000,
+        "Photo": "https://collabcubed.files.wordpress.com/2012/07/cildo-meireles_fontes-fountains-sources_collabcubed.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.18209661,
+          -22.89625325
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Rafael Barradas",
+        "Birth": 1890,
+        "Death": 1929,
+        "Country": "Uruguay",
+        "KeyWork": "Hombre Flecha",
+        "WorkYear": 1918,
+        "YearUpper": "",
+        "Movement": "Futurism",
+        "LowLat": -35.19835512,
+        "HighLat": -34.90642354,
+        "LowLong": -56.19856154,
+        "HighLong": -55.66371508,
+        "Period": 1900,
+        "Photo": "https://images.e-flux-systems.com/416139_d67edea4eb366294f43fde7016c0dee8.jpg,1024"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.19856154,
+          -34.90642354
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Tlatilco ",
+        "Birth": "1200 BC",
+        "Death": "200 BC",
+        "Country": "Mexico",
+        "KeyWork": "Tlatilco Figure Kissing a Dog",
+        "WorkYear": "1200 BC",
+        "YearUpper": "600 BC",
+        "Movement": "Pre-Classical Mesoamerica",
+        "LowLat": 19.25751313,
+        "HighLat": 19.45731421,
+        "LowLong": -99.16504241,
+        "HighLong": -98.66362385,
+        "Period": "BC",
+        "Photo": "https://live.staticflickr.com/7631/16628758030_bd06c191cb_h.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.16504241,
+          19.45731421
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Utagawa Hiroshige",
+        "Birth": 1797,
+        "Death": 1858,
+        "Country": "Japan",
+        "KeyWork": "A man on horseback in the snow",
+        "WorkYear": 1840,
+        "YearUpper": 1842,
+        "Movement": "ukiyo-e",
+        "LowLat": 35.57651893,
+        "HighLat": 35.68862953,
+        "LowLong": 139.775474,
+        "HighLong": 139.9870099,
+        "Period": 1800,
+        "Photo": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Hiroshige%2C_A_man_on_horseback_in_the_snow.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.775474,
+          35.68862953
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Boeotian Statuettes",
+        "Birth": "590 BC",
+        "Death": "500 BC",
+        "Country": "Greece",
+        "KeyWork": "Terracotta statuette of a seated woman",
+        "WorkYear": "575 BC",
+        "YearUpper": "550 BC",
+        "Movement": "Early Classical ",
+        "LowLat": 38.2907127,
+        "HighLat": 38.44056351,
+        "LowLong": 22.87999838,
+        "HighLong": 23.09153434,
+        "Period": "BC",
+        "Photo": "https://collectionapi.metmuseum.org/api/collection/v1/iiif/255431/534599/main-image"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.87999838,
+          38.44056351
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Frank Lloyd Wright",
+        "Birth": 1867,
+        "Death": 1959,
+        "Country": "America",
+        "KeyWork": "Kentuck Knob",
+        "WorkYear": 1953,
+        "YearUpper": "",
+        "Movement": "Architecture",
+        "LowLat": 39.53681705,
+        "HighLat": 39.86944885,
+        "LowLong": -79.52003265,
+        "HighLong": -78.89430407,
+        "Period": 1900,
+        "Photo": "https://kentuckknob.com/cdn/shop/files/kk_invisble_window_wall_w_autumn_trees_fall_2022_1_2048x2048.jpg?v=1674574985"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.52003265,
+          39.86944885
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Le Corbusier",
+        "Birth": 1887,
+        "Death": 1965,
+        "Country": "France",
+        "KeyWork": "La Tourette Monastery",
+        "WorkYear": 1953,
+        "YearUpper": 1957,
+        "Movement": "Architecture",
+        "LowLat": 45.48907254,
+        "HighLat": 45.82170434,
+        "LowLong": 4.623759539,
+        "HighLong": 5.280826777,
+        "Period": 1900,
+        "Photo": "https://static.dezeen.com/uploads/2016/07/dominican-monastery-of-la-tourette-le-corbusier-near-lyon-france-unesco_dezeen_1568_14.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.623759539,
+          45.82170434
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Vladimir Tatlin",
+        "Birth": 1885,
+        "Death": 1953,
+        "Country": "Russia",
+        "KeyWork": "Monument to the Third Internaional",
+        "WorkYear": 1919,
+        "YearUpper": 1920,
+        "Movement": "Constructivist",
+        "LowLat": 59.18976037,
+        "HighLat": 59.90016421,
+        "LowLong": 30.27436346,
+        "HighLong": 31.04633911,
+        "Period": 1900,
+        "Photo": "https://smarthistory.org/wp-content/uploads/2019/09/Tatlin-drawing.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.27436346,
+          59.90016421
+        ]
+      }
+    }
+  ]
+}];
+
+
+<!--"the following runs a custom function on each feaure of the geojson"-->	
+
+L.geoJSON(geojsonFeature, {
+   onEachFeature: addMyData
+}).addTo(map);
+
+
+<!---->	
+<!---->	
+<!--"the following is the custom function, which adds a feature to a layer according to its period and binds a popup with the associated information - split by key work year or key work year range"-->	
+function addMyData( feature, layer ){
+	if (feature.properties.Period == "2000"){
+		twenty.addLayer(layer) 
+		 if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} else {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     				} 
+	
+	var imageUrl = feature.properties.Photo;
+	var imageLatLong = L.latLngBounds([
+		[feature.properties.LowLat, feature.properties.HighLong],
+    	[feature.properties.HighLat, feature.properties.HighLong],
+    	[feature.properties.HighLat, feature.properties.LowLong],
+    	[feature.properties.LowLat, feature.properties.LowLong]
+    	]);
+
+	var workImage = L.imageOverlay(imageUrl, imageLatLong, {
+    	opacity: 1.0,
+    	alt: "Error",
+    	interactive: true
+	}).addTo(twenty);	
+	
+		workImage.on('click', function(){
+		window.location = feature.properties.Photo;
+		});
+	
+	
+	} else if (feature.properties.Period == "1900"){
+		nintn.addLayer(layer) 
+		 if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} else {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} 
+	
+	var imageUrl = feature.properties.Photo;
+	var imageLatLong = L.latLngBounds([
+		[feature.properties.LowLat, feature.properties.HighLong],
+    	[feature.properties.HighLat, feature.properties.HighLong],
+    	[feature.properties.HighLat, feature.properties.LowLong],
+    	[feature.properties.LowLat, feature.properties.LowLong]
+    	]);
+
+	var workImage = L.imageOverlay(imageUrl, imageLatLong, {
+    	opacity: 1.0,
+    	alt: "Error",
+    	interactive: true
+		}).addTo(nintn);
+		
+		workImage.on('click', function(){
+		window.location = feature.properties.Photo;
+		});
+	
+	
+	} else if (feature.properties.Period == "1800"){
+		eihtn.addLayer(layer) 
+		 if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} else {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} 
+	
+		var imageUrl = feature.properties.Photo;
+		var imageLatLong = L.latLngBounds([
+			[feature.properties.LowLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.LowLong],
+    		[feature.properties.LowLat, feature.properties.LowLong]
+    		]);
+
+		var workImage = L.imageOverlay(imageUrl, imageLatLong, {
+   	 	opacity: 1.0,
+   	 	alt: "Error",
+   	 	interactive: true
+		}).addTo(eihtn);
+		
+		workImage.on('click', function(){
+		window.location = feature.properties.Photo;
+		});
+			
+	
+	} else if (feature.properties.Period == "1500"){
+		fivtn.addLayer(layer) 
+		 if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} else {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} 
+	
+		var imageUrl = feature.properties.Photo;
+		var imageLatLong = L.latLngBounds([
+			[feature.properties.LowLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.LowLong],
+    		[feature.properties.LowLat, feature.properties.LowLong]
+    		]);
+
+		var workImage = L.imageOverlay(imageUrl, imageLatLong, {
+   	 	opacity: 1.0,
+   	 	alt: "Error",
+   	 	interactive: true
+		}).addTo(fivtn);
+		
+		workImage.on('click', function(){
+		window.location = feature.properties.Photo;
+		});
+			
+	
+	} else if (feature.properties.Period == "1400"){
+		fortn.addLayer(layer) 
+		 if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} else {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		}
+	
+		var imageUrl = feature.properties.Photo;
+		var imageLatLong = L.latLngBounds([
+			[feature.properties.LowLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.LowLong],
+    		[feature.properties.LowLat, feature.properties.LowLong]
+    		]);
+
+		var workImage = L.imageOverlay(imageUrl, imageLatLong, {
+   	 	opacity: 1.0,
+   	 	alt: "Error",
+   	 	interactive: true
+		}).addTo(fortn);	
+		
+		workImage.on('click', function(){
+		window.location = feature.properties.Photo;
+		});
+		
+		} else {
+		BCE.addLayer(layer) 	
+		if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} else {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		}
+ 	
+		var imageUrl = feature.properties.Photo;
+		var imageLatLong = L.latLngBounds([
+			[feature.properties.LowLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.LowLong],
+    		[feature.properties.LowLat, feature.properties.LowLong]
+    		]);
+
+		var workImage = L.imageOverlay(imageUrl, imageLatLong, {
+   	 	opacity: 1.0,
+   	 	alt: "Error",
+   	 	interactive: true
+		}).addTo(BCE); 	
+		
+		workImage.on('click', function(){
+		window.location = feature.properties.Photo;
+		});
+ 	
+ 	}
+} 	
+
+
+<!---->	
+<!---->	
+<!--"the following is the controls for layer toggling"-->
+
+let layerControl = {
+	"2000s": twenty,
+	"1900s": nintn, 
+	"1800s": eihtn,
+	"1500s": fivtn,
+	"1400s": fortn,
+	"Before Common Era": BCE,
+	}
+
+
+L.control.layers(null, layerControl).addTo( map )
+
+	</script>
+</body>
+</html>
+

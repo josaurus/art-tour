@@ -1,4 +1,4 @@
-# <b> <font color = "#87c4d6"> Ancient Mediterranean-Faring Map </font> </b>
+# <b> <font color = "#87c4d6"> Art Tour </font> </b>
 <p align = "center"> Map of fun art and artists for the world-wide web
 </p><br>
 <br>

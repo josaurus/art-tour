@@ -4,17 +4,21 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
+     
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
 	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>  
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
-	<button>
-  <i class="fas fa-thumbs-up"></i> Like
-	</button>	
 	<style>
 		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
+		.text-below-marker {
+		position:absolute;
+ 	 	white-space: nowrap;
+ 	 	font-family: cursive; 
+  		font-size: 30px;
+ 		min-height: 1.2em;
+}	
 		</style>
 </head>
 <body>
@@ -63,12 +67,12 @@ var geojsonFeature = [
         "WorkYear": 2019,
         "YearUpper": "",
         "Movement": "Contemporary",
-        "LowLat": 31.26702911,
+        "LowLat": 31.17896864,
         "HighLat": 31.59966091,
         "LowLong": 74.31041529,
-        "HighLong": 74.68177842,
+        "HighLong": 74.78049519,
         "Period": 2000,
-        "Photo": "https://sal-bucket-1.s3.amazonaws.com/wp-content/uploads/2023/07/09232206/puppy-play-date.jpeg"
+        "Photo": "https://mdl.artvee.com/sftb/407385mfg.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -1010,9 +1014,30 @@ var home = {
   lng: 0,
   zm: 2
 }; 
-L.easyButton('fa-home',function(btn,map){
+L.easyButton('<img src=".images/home.png">',function(btn,map){
   map.setView([home.lat, home.lng], home.zm);
 },'Zoom To Home').addTo(map);
+
+
+<!---->	
+<!---->	
+<!--"the following adds the welcome banner"-->
+var scrol = L.icon({
+		iconUrl: '.images/scroll.png',
+		
+		iconSize: [400,90],
+		iconAnchor: [67,34],
+});
+
+L.marker([76.412, -42.015], {icon: scrol}).addTo(map);
+
+L.marker([76.412, -42.015], {
+  icon: L.divIcon({
+      html: "Welcome to a Tour of Art",
+      className: 'text-below-marker',
+    })
+}).addTo(map); 
+
 
 	</script>
 </body>

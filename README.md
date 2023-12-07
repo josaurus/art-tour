@@ -7,4 +7,4 @@ Points will be updated semi-frequently as part of an ongoing campaign to see all
 <br>
 Constructed with the <a href = "https://leafletjs.com/index.html">Leaflet</a> library and the Light Grey World Base map by ESRI.
 <br>
-Check it out at: 
+Start the tour out at: <a href= "https://josaurus.github.io/art-tour/"> https://josaurus.github.io/art-tour</a>

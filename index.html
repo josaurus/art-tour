@@ -7,6 +7,8 @@
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>  
 	<style>
 		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
 		</style>
@@ -33,6 +35,8 @@ let eihtn = L.layerGroup().addTo( map )
 let fivtn = L.layerGroup().addTo( map )
 
 let fortn = L.layerGroup().addTo( map )
+
+let thirtn = L.layerGroup().addTo( map )
 
 let BCE = L.layerGroup().addTo( map )
 
@@ -575,10 +579,10 @@ var geojsonFeature = [
         "WorkYear": "1200 BC",
         "YearUpper": "600 BC",
         "Movement": "Pre-Classical Mesoamerica",
-        "LowLat": 19.25751313,
+        "LowLat": 19.27120321,
         "HighLat": 19.45731421,
         "LowLong": -99.16504241,
-        "HighLong": -98.66362385,
+        "HighLong": -98.69757406,
         "Period": "BC",
         "Photo": "https://live.staticflickr.com/7631/16628758030_bd06c191cb_h.jpg"
       },
@@ -719,6 +723,32 @@ var geojsonFeature = [
           59.90016421
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Limbourg brothers",
+        "Birth": 1385,
+        "Death": 1416,
+        "Country": "France",
+        "KeyWork": "February, Très Riches Heures du Duc de Berry",
+        "WorkYear": 1413,
+        "YearUpper": 1416,
+        "Movement": "Gothic",
+        "LowLat": 46.74970741,
+        "HighLat": 47.08233921,
+        "LowLong": 2.399194269,
+        "HighLong": 2.681242209,
+        "Period": 1300,
+        "Photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Les_Tr%C3%A8s_Riches_Heures_du_duc_de_Berry_f%C3%A9vrier.jpg/800px-Les_Tr%C3%A8s_Riches_Heures_du_duc_de_Berry_f%C3%A9vrier.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.399194269,
+          47.08233921
+        ]
+      }
     }
   ]
 }];
@@ -738,11 +768,11 @@ function addMyData( feature, layer ){
 	if (feature.properties.Period == "2000"){
 		twenty.addLayer(layer) 
 		 if (feature.properties.YearUpper == "") {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} else {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     				} 
 	
@@ -768,11 +798,11 @@ function addMyData( feature, layer ){
 	} else if (feature.properties.Period == "1900"){
 		nintn.addLayer(layer) 
 		 if (feature.properties.YearUpper == "") {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} else {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} 
@@ -799,11 +829,11 @@ function addMyData( feature, layer ){
 	} else if (feature.properties.Period == "1800"){
 		eihtn.addLayer(layer) 
 		 if (feature.properties.YearUpper == "") {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} else {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} 
@@ -830,11 +860,11 @@ function addMyData( feature, layer ){
 	} else if (feature.properties.Period == "1500"){
 		fivtn.addLayer(layer) 
 		 if (feature.properties.YearUpper == "") {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} else {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} 
@@ -861,11 +891,11 @@ function addMyData( feature, layer ){
 	} else if (feature.properties.Period == "1400"){
 		fortn.addLayer(layer) 
 		 if (feature.properties.YearUpper == "") {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} else {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		}
@@ -887,15 +917,43 @@ function addMyData( feature, layer ){
 		workImage.on('click', function(){
 		window.location = feature.properties.Photo;
 		});
-		
-		} else {
-		BCE.addLayer(layer) 	
-		if (feature.properties.YearUpper == "") {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+	} else if (feature.properties.Period == "1300"){
+		thirtn.addLayer(layer) 
+		 if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		} else {
-    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: ' + feature.properties.KeyWork + ", " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		}
+	
+		var imageUrl = feature.properties.Photo;
+		var imageLatLong = L.latLngBounds([
+			[feature.properties.LowLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.LowLong],
+    		[feature.properties.LowLat, feature.properties.LowLong]
+    		]);
+
+		var workImage = L.imageOverlay(imageUrl, imageLatLong, {
+   	 	opacity: 1.0,
+   	 	alt: "Error",
+   	 	interactive: true
+		}).addTo(fortn);	
+		
+		workImage.on('click', function(){
+		window.location = feature.properties.Photo;
+		});	
+		} else {
+		BCE.addLayer(layer) 	
+		if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} else {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
 			layer.on('click', function(e){
    		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
     		}
@@ -932,11 +990,25 @@ let layerControl = {
 	"1800s": eihtn,
 	"1500s": fivtn,
 	"1400s": fortn,
+	"1300s": thirtn,
 	"Before Common Era": BCE,
 	}
 
 
 L.control.layers(null, layerControl).addTo( map )
+
+<!---->	
+<!---->	
+<!--"the following is an EasyButton home icon"-->
+
+var home = {
+  lat: 20,
+  lng: 0,
+  zm: 2
+}; 
+L.easyButton('<img src=".images/home.png">',function(btn,map){
+  map.setView([home.lat, home.lng], home.zm);
+},'Zoom To Home').addTo(map);
 
 	</script>
 </body>

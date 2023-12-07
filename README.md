@@ -5,4 +5,6 @@
 Points will be updated semi-frequently as part of an ongoing campaign to see all the art
 <br>
 <br>
+Constructed with the <a href = "https://leafletjs.com/index.html">Leaflet</a> library and the Light Grey World Base map by ESRI.
+<br>
 Check it out at: 

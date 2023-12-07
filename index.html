@@ -9,6 +9,10 @@
      crossorigin=""></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
 	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>  
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+	<button>
+  <i class="fas fa-thumbs-up"></i> Like
+	</button>	
 	<style>
 		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
 		</style>
@@ -1006,7 +1010,7 @@ var home = {
   lng: 0,
   zm: 2
 }; 
-L.easyButton('<img src=".images/home.png">',function(btn,map){
+L.easyButton('fa-home',function(btn,map){
   map.setView([home.lat, home.lng], home.zm);
 },'Zoom To Home').addTo(map);
 

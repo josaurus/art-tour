@@ -45,6 +45,8 @@ let nintn = L.layerGroup().addTo( map )
 
 let eihtn = L.layerGroup().addTo( map )
 
+let sixtn = L.layerGroup().addTo( map )
+
 let fivtn = L.layerGroup().addTo( map )
 
 let fortn = L.layerGroup().addTo( map )
@@ -788,6 +790,32 @@ var geojsonFeature = [
           46.16061823
         ]
       }
+    }, 
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Michelangelo Merisi da Caravaggio",
+        "Birth": 1571,
+        "Death": 1610,
+        "Country": "Italy",
+        "KeyWork": "The Musicians",
+        "WorkYear": 1597,
+        "YearUpper": "",
+        "Movement": "Baroque",
+        "LowLat": 41.9700552,
+        "HighLat": 42.16985628,
+        "LowLong": 12.356455,
+        "HighLong": 12.71998345,
+        "Period": 1600,
+        "Photo": "https://collectionapi.metmuseum.org/api/collection/v1/iiif/435844/1581937/main-image"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.356455,
+          42.16985628
+        ]
+      }
     }
   ]
 }];
@@ -894,7 +922,38 @@ function addMyData( feature, layer ){
 		workImage.on('click', function(){
 		window.location = feature.properties.Photo;
 		});
-			
+	
+	
+	} else if (feature.properties.Period == "1600"){
+		sixtn.addLayer(layer) 
+		 if (feature.properties.YearUpper == "") {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br>Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} else {
+    		layer.bindPopup( '<b><font size = "4">' + feature.properties.Name + '</font></b><br>' + feature.properties.Birth + " - " + feature.properties.Death + '<br>' + feature.properties.Country + '<br>' + feature.properties.Movement + '<br><br> Key work: <i>' + feature.properties.KeyWork + "</i>, " + feature.properties.WorkYear + " - " + feature.properties.YearUpper + '<br><br>' +'<a href="' + feature.properties.Photo + '" target="_blank">Image Link</a>');
+			layer.on('click', function(e){
+   		 map.setView([e.latlng.lat, e.latlng.lng], 10);})     		
+    		} 
+	
+		var imageUrl = feature.properties.Photo;
+		var imageLatLong = L.latLngBounds([
+			[feature.properties.LowLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.HighLong],
+    		[feature.properties.HighLat, feature.properties.LowLong],
+    		[feature.properties.LowLat, feature.properties.LowLong]
+    		]);
+
+		var workImage = L.imageOverlay(imageUrl, imageLatLong, {
+   	 	opacity: 1.0,
+   	 	alt: "Error",
+   	 	interactive: true
+		}).addTo(fivtn);
+		
+		workImage.on('click', function(){
+		window.location = feature.properties.Photo;
+		});
+				
 	
 	} else if (feature.properties.Period == "1500"){
 		fivtn.addLayer(layer) 
@@ -1027,6 +1086,7 @@ let layerControl = {
 	"2000s": twenty,
 	"1900s": nintn, 
 	"1800s": eihtn,
+	"1600s": sixtn, 
 	"1500s": fivtn,
 	"1400s": fortn,
 	"1300s": thirtn,
